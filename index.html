@@ -4,830 +4,632 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jayalakshmi Gangadhar | Strategy & Operations Analyst</title>
-    <!-- ChartJS library for high-quality data rendering -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif; 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
         }
-        
-        body { 
-            color: #2b2d42; 
-            line-height: 1.6; 
-            background-color: #ffffff; 
+
+        body {
+            color: #e0e1dd;
+            background-color: #080d1e;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
         }
-        
-        a { 
-            text-decoration: none; 
-            color: #0f4c81; 
+
+        /* Holographic background grid */
+        .ambient-grid {
+            position: fixed;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 50% 30%, rgba(15, 76, 129, 0.4) 0%, transparent 60%),
+                radial-gradient(circle at 10% 80%, rgba(100, 223, 223, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(230, 57, 70, 0.12) 0%, transparent 40%),
+                radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 100% 100%, 30px 30px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: #64dfdf;
             transition: color 0.2s;
         }
         a:hover {
-            color: #1d3557;
+            color: #ffffff;
             text-decoration: underline;
         }
 
-        header { 
-            background: #ffffff; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
-            position: fixed; 
-            width: 100%; 
-            top: 0; 
-            z-index: 1000; 
-            border-bottom: 1px solid #f4f6f9;
-        }
-        
-        .nav-container { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            max-width: 1200px; 
-            margin: 0 auto; 
-            padding: 15px 20px; 
-        }
-        
-        .logo { 
-            font-size: 1.2rem; 
-            font-weight: 700; 
-            color: #0f4c81; 
-        }
-        
-        .nav-links { 
-            display: flex; 
-            list-style: none; 
-        }
-        
-        .nav-links li { 
-            margin-left: 25px; 
-            font-weight: 500; 
-        }
-        
-        .nav-links a {
-            color: #6c757d;
-        }
-        .nav-links a:hover { 
-            color: #0f4c81; 
+        /* Header */
+        header {
+            background: rgba(8, 13, 30, 0.9);
+            backdrop-filter: blur(14px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .hero { 
-            background: linear-gradient(135deg, #0f4c81 0%, #1d3557 100%); 
-            color: white; 
-            min-height: 55vh; 
-            display: flex; 
-            align-items: center; 
-            padding: 140px 20px 60px; 
-        }
-        
-        .hero-container {
+        .nav-container {
             display: flex;
-            max-width: 1200px;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1300px;
             margin: 0 auto;
-            align-items: center;
-            justify-content: space-between;
-            gap: 40px;
-            width: 100%;
+            padding: 14px 24px;
         }
 
-        .hero-content { 
-            flex: 1;
-            text-align: left;
-        }
-        
-        .hero h1 { 
-            font-size: 2.2rem; 
-            margin-bottom: 15px; 
+        .logo {
+            font-size: 1.25rem;
             font-weight: 700;
-            line-height: 1.3;
-        }
-        
-        .hero p { 
-            font-size: 1.1rem; 
-            opacity: 0.9; 
-            margin-bottom: 25px;
-        }
-
-        .contact-info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 8px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        .contact-item {
-            font-size: 0.95rem;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .contact-item span {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            opacity: 0.7;
-            margin-bottom: 2px;
-        }
-
-        .contact-item a {
             color: #ffffff;
-            font-weight: 600;
-        }
-        .contact-item a:hover {
-            color: #e1ecf4;
+            letter-spacing: 0.5px;
         }
 
-        /* Border and circular radius layouts removed to show raw picture context */
-        .profile-img-wrapper {
-            flex-shrink: 0;
-            width: 280px;
-            height: 280px;
-            overflow: hidden;
-        }
-
-        .profile-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        section { 
-            padding: 50px 20px; 
-            max-width: 1200px; 
-            margin: 0 auto; 
-        }
-        
-        .section-title { 
-            text-align: center; 
-            font-size: 2rem; 
-            margin-bottom: 35px; 
-            color: #1d3557; 
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .tech-slide-card {
-            background: #ffffff;
-            border: 1px solid #e1e8ed;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.06), inset 0 -2px 5px rgba(0,0,0,0.02), 0 1px 3px rgba(0,0,0,0.05);
-            border-radius: 12px;
-            padding: 35px;
-            margin-bottom: 40px;
-            position: relative;
-            transform: perspective(1000px) translateZ(0);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .tech-slide-card:hover {
-            transform: perspective(1000px) translateY(-5px) translateZ(5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-
-        .charts-wrapper {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .chart-card {
-            background: #ffffff;
-            border: 1px solid #e1e8ed;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.04);
-            padding: 25px;
-            border-radius: 12px;
-            text-align: center;
-        }
-
-        .chart-card h3 {
-            color: #1d3557;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-        }
-
-        .chart-container {
-            position: relative;
-            margin: auto;
-            height: 260px;
-            width: 100%;
-        }
-
-        .company-header {
+        .nav-links {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 2px solid #f4f6f9;
-            padding-bottom: 20px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .company-meta {
-            display: flex;
+            list-style: none;
             align-items: center;
             gap: 20px;
         }
 
-        .company-logo {
-            width: 130px;
-            height: 45px;
-            object-fit: contain;
+        .nav-links a {
+            color: #e0e1dd;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .nav-links a:hover {
+            color: #64dfdf;
         }
 
-        .company-info h2 {
-            font-size: 1.4rem;
-            color: #1d3557;
+        .nav-cv-btn {
+            background: #64dfdf;
+            color: #080d1e !important;
+            padding: 7px 18px;
+            border-radius: 20px;
+            font-weight: 700 !important;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 15px rgba(100, 223, 223, 0.35);
+        }
+        .nav-cv-btn:hover {
+            background: #ffffff;
+            text-decoration: none !important;
         }
 
-        .company-info h3 {
-            font-size: 1.05rem;
-            color: #e63946;
+        .voice-toggle-btn {
+            background: rgba(100, 223, 223, 0.15);
+            color: #64dfdf;
+            border: 1px solid #64dfdf;
+            border-radius: 20px;
+            padding: 6px 14px;
+            cursor: pointer;
+            font-size: 0.82rem;
             font-weight: 600;
         }
 
-        .timeline-location {
-            text-align: right;
+        /* Main Hero Split Grid: Left Details | Center 3D Doll | Right Details */
+        .stage-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 110px 24px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .stage-split-grid {
+            display: grid;
+            grid-template-columns: 1fr 380px 1fr;
+            gap: 28px;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* Side Detail Panels */
+        .side-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            z-index: 2;
+        }
+
+        .glass-card {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(100, 223, 223, 0.2);
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .glass-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(100, 223, 223, 0.5);
+        }
+
+        .glass-card h3 {
+            color: #64dfdf;
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .glass-card p {
+            font-size: 0.92rem;
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        .btn-talk-action {
+            margin-top: 10px;
+            background: rgba(100, 223, 223, 0.15);
+            color: #64dfdf;
+            border: 1px solid #64dfdf;
+            padding: 6px 14px;
+            border-radius: 14px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        .btn-talk-action:hover {
+            background: #64dfdf;
+            color: #080d1e;
+        }
+
+        /* Center 3D Doll Stage */
+        .doll-center-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 3;
+            perspective: 1000px;
+        }
+
+        .doll-pedestal {
+            position: relative;
+            width: 320px;
+            height: 480px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            background: radial-gradient(circle at 50% 60%, rgba(100, 223, 223, 0.18) 0%, transparent 70%);
+        }
+
+        .doll-hologram-ring {
+            position: absolute;
+            bottom: 15px;
+            width: 240px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #64dfdf;
+            box-shadow: 0 0 25px #64dfdf, inset 0 0 20px #64dfdf;
+            transform: rotateX(75deg);
+            pointer-events: none;
+            animation: pulseRing 3s ease-in-out infinite;
+        }
+
+        /* 3D Doll Container & Head Tracking */
+        .doll-model-wrapper {
+            width: 290px;
+            height: 420px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.08s ease-out;
+            cursor: pointer;
+        }
+
+        .doll-model-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 18px;
+            border: 2px solid rgba(100, 223, 223, 0.4);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(100, 223, 223, 0.3);
+            transition: transform 0.08s ease-out;
+        }
+
+        /* Speech bubble on top of doll */
+        .doll-dialogue-bubble {
+            background: rgba(15, 23, 42, 0.95);
+            border: 2px solid #64dfdf;
+            color: #ffffff;
+            border-radius: 16px;
+            padding: 10px 16px;
+            font-size: 0.85rem;
+            max-width: 260px;
+            text-align: center;
+            margin-bottom: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            animation: floatBubble 3s ease-in-out infinite;
+        }
+
+        .doll-dialogue-bubble strong {
+            color: #64dfdf;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .doll-trigger-btn {
+            margin-top: 14px;
+            background: #64dfdf;
+            color: #080d1e;
+            border: none;
+            padding: 9px 20px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(100, 223, 223, 0.4);
+            transition: transform 0.2s;
+        }
+        .doll-trigger-btn:hover {
+            transform: scale(1.05);
+            background: #ffffff;
+        }
+
+        /* General Section Blocks */
+        section {
+            padding: 50px 24px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: #ffffff;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cv-card, .exp-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(100, 223, 223, 0.2);
+            border-radius: 14px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .cv-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .cv-btn-main {
+            background: #64dfdf;
+            color: #080d1e;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
             font-size: 0.9rem;
-            color: #6c757d;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .cv-btn-main:hover {
+            background: #ffffff;
+            text-decoration: none;
+            color: #080d1e;
         }
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(48%, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 20px;
         }
 
         .project-block {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            padding: 22px;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 20px;
         }
 
         .project-block h4 {
-            color: #0f4c81;
+            color: #64dfdf;
             font-size: 1.05rem;
-            margin-bottom: 12px;
-            font-weight: 700;
+            margin-bottom: 8px;
         }
 
-        .project-collapsible {
-            display: none;
-            margin-top: 15px;
-            border-top: 1px dashed #ced4da;
-            padding-top: 15px;
-        }
-
-        .toggle-btn {
-            background: #e1ecf4;
-            color: #0f4c81;
-            border: 1px solid rgba(15, 76, 129, 0.15);
-            padding: 8px 14px;
-            border-radius: 4px;
-            cursor: pointer;
+        .impact-pill {
+            display: inline-block;
+            background: rgba(43, 147, 72, 0.25);
+            color: #52b788;
+            border: 1px solid #52b788;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.82rem;
             font-weight: 600;
-            font-size: 0.85rem;
-            margin-top: 12px;
-            display: inline-flex;
-            align-self: flex-start;
-        }
-
-        .toggle-btn:hover {
-            background: #0f4c81;
-            color: #ffffff;
-        }
-
-        .context-box, .solution-box {
-            margin-bottom: 12px;
-            font-size: 0.9rem;
-            color: #495057;
-        }
-
-        .context-box strong, .solution-box strong {
-            color: #1d3557;
-        }
-
-        .bullet-list {
-            margin-left: 18px;
-            margin-top: 5px;
-            margin-bottom: 12px;
-            font-size: 0.9rem;
-            color: #495057;
-        }
-
-        .bullet-list li {
-            margin-bottom: 5px;
-        }
-
-        .impact-text {
-            font-weight: 600;
-            color: #2b9348;
-            font-size: 0.9rem;
-            background: #eefdf2;
-            padding: 8px;
-            border-radius: 4px;
-        }
-
-        .edu-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .edu-card {
-            background: #ffffff;
-            border: 1px solid #e1e8ed;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.06), inset 0 -2px 5px rgba(0,0,0,0.02), 0 1px 3px rgba(0,0,0,0.05);
-            padding: 30px;
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-            transform: perspective(1000px) translateZ(0);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .edu-card:hover {
-            transform: perspective(1000px) translateY(-5px) translateZ(5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-
-        .edu-logo-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            gap: 15px;
-        }
-
-        .edu-logo {
-            width: 70px;
-            height: 70px;
-            object-fit: contain;
-        }
-
-        .edu-title h3 {
-            color: #1d3557;
-            font-size: 1.15rem;
-            font-weight: 700;
-        }
-
-        .edu-title h4 {
-            color: #495057;
-            font-size: 0.95rem;
-        }
-
-        .edu-date {
-            font-size: 0.85rem;
-            color: #6c757d;
-            margin-bottom: 15px;
-            font-style: italic;
-        }
-
-        .edu-details {
-            font-size: 0.9rem; 
-            color: #495057;
-        }
-        
-        .edu-details ul {
-            margin-left: 18px;
-            margin-top: 5px;
-        }
-        
-        .edu-details li {
-            margin-bottom: 4px;
-        }
-
-        .edu-link-container {
-            margin-top: 20px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            border-top: 1px solid #f4f6f9;
-            padding-top: 10px;
-        }
-
-        .badge-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
-            margin-top: 15px;
-        }
-
-        .badge {
-            background: #e1ecf4;
-            color: #0f4c81;
-            padding: 5px 12px;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            font-weight: 600;
+            margin-top: 10px;
         }
 
         footer {
-            background-color: #1d3557; 
-            color: #ffffff; 
-            text-align: center; 
-            padding: 25px; 
-            font-size: 0.9rem; 
-            margin-top: 40px;
+            text-align: center;
+            padding: 30px;
+            color: #94a3b8;
+            font-size: 0.88rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        @media (max-width: 992px) {
-            .projects-grid { grid-template-columns: 1fr; }
-            .hero-container { flex-direction: column-reverse; text-align: center; }
-            .hero-content { text-align: center; }
+        @keyframes pulseRing {
+            0%, 100% { opacity: 0.6; transform: rotateX(75deg) scale(1); }
+            50% { opacity: 1; transform: rotateX(75deg) scale(1.08); }
         }
 
-        @media (max-width: 768px) { 
-            .hero h1 { font-size: 1.8rem; } 
-            .company-header { flex-direction: column; align-items: flex-start; }
-            .timeline-location { text-align: left; }
-            .edu-container { grid-template-columns: 1fr; }
-            .nav-links { display: none; }
-            .profile-img-wrapper { width: 220px; height: 220px; }
+        @keyframes floatBubble {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @media (max-width: 1024px) {
+            .stage-split-grid {
+                grid-template-columns: 1fr;
+            }
+            .doll-center-stage {
+                order: -1;
+                margin-bottom: 20px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Navigation -->
+    <div class="ambient-grid"></div>
+
+    <!-- Navigation Header -->
     <header>
         <div class="nav-container">
-            <div class="logo">Jayalakshmi G.</div>
+            <div class="logo">Jayalakshmi Gangadhar</div>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#metrics">Analytics Insights</a></li>
-                    <li><a href="#experience">Project Experience</a></li>
-                    <li><a href="#education">Education</a></li>
+                    <li><a onclick="routeTo('hero', 'Navigating to overview and profile.')">Home</a></li>
+                    <li><a onclick="routeTo('cv', 'Opening CV and verified credentials.')">CV</a></li>
+                    <li><a onclick="routeTo('experience', 'Navigating to project deliverables.')">Experience</a></li>
+                    <li><a href="Jay-CV- MBA and MSC_6+ epx (1).pdf" download="Jayalakshmi_Gangadhar_CV.pdf" class="nav-cv-btn">📥 Download CV</a></li>
+                    <li><button class="voice-toggle-btn" onclick="toggleVoice()" id="voiceToggleBtn">🔊 Female Voice: ON</button></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Headline Banner -->
-    <section id="home" class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1>BUSINESS ANALYSIS | DATA ANALYTICS | REVENUE OPERATIONS</h1>
-                <p>Sales operations and business analyst with six years' experience driving process improvements, data validation, and automated workflows across EMEA. Focused on eliminating friction metrics and bolstering revenue lifecycle governance.</p>
-                
-                <!-- Contact Info Floating Grid Block -->
-                <div class="contact-info-grid">
-                    <div class="contact-item">
-                        <span>Email</span>
-                        <a href="mailto:Jayalakshmi.g.2507@gmail.com">Jayalakshmi.g.2507@gmail.com</a>
-                    </div>
-                    <div class="contact-item">
-                        <span>Phone</span>
-                        <a href="tel:+3530871861718">+353 0871861718</a>
-                    </div>
-                    <div class="contact-item">
-                        <span>LinkedIn</span>
-                        <a href="https://www.linkedin.com/in/jayancimsc/" target="_blank">linkedin.com/in/jayancimsc</a>
-                    </div>
+    <!-- Center 3D Doll Stage with Flanking Details -->
+    <main class="stage-section" id="hero">
+        <div class="stage-split-grid">
+
+            <!-- LEFT DETAILS PANEL -->
+            <div class="side-panel">
+                <div class="glass-card">
+                    <h3>🎓 Graduate Credentials</h3>
+                    <p>MSc in Business Management (National College of Ireland, Dublin, 2026)[cite: 2, 4] and Executive MBA (Christ University, 2024)[cite: 2, 4]. Focused on CRM workflows, fund operations, and automated analytics[cite: 2, 4].</p>
+                    <button class="btn-talk-action" onclick="femaleSpeak('I hold an MSc in Business Management from Dublin and an Executive MBA from Christ University.')">
+                        🔊 Read Education[cite: 2, 4]
+                    </button>
+                </div>
+
+                <div class="glass-card">
+                    <h3>⚡ Core Specialization[cite: 2, 4]</h3>
+                    <p>6+ years managing revenue operations, transactional governance, and contract approvals across EMEA for SaaS and enterprise leaders.</p>
+                    <button class="btn-talk-action" onclick="femaleSpeak('I specialize in Sales Operations, revenue lifecycles, and cross-functional governance.')">
+                        🔊 Read Focus
+                    </button>
+                </div>
+
+                <div class="glass-card">
+                    <h3>📍 Location & Contact[cite: 2]</h3>
+                    <p><strong>Base:</strong> Dublin, Ireland[cite: 2]<br>
+                    <strong>Email:</strong> <a href="mailto:jayalakshmi.g.2507@gmail.com">jayalakshmi.g.2507@gmail.com</a>[cite: 2]<br>
+                    <strong>Phone:</strong> +353 0871861718[cite: 2]</p>
                 </div>
             </div>
-            
-            <!-- Profile Picture Box Frame -->
-            <div class="profile-img-wrapper">
-                <img src="https://i.postimg.cc/8c7bQywM/Image-24-04-25-at-6-53-PM.jpg" alt="Jayalakshmi Gangadhar Portrait" class="profile-img">
+
+            <!-- CENTER: 3D ANIME DOLL FIGURE -->
+            <div class="doll-center-stage">
+                <div class="doll-dialogue-bubble" id="dollBubble">
+                    <strong>Jayalakshmi G.</strong>
+                    <span>Move your cursor around! My eyes and face will track you.</span>
+                </div>
+
+                <div class="doll-pedestal">
+                    <div class="doll-model-wrapper" id="dollModel" onclick="speakDollIntro()">
+                        <!-- Centered 3D Anime Doll -->
+                        <img src="https://i.postimg.cc/WtX7qkVW/IMG-2178.jpg" id="dollImage" class="doll-model-img" alt="3D Anime Doll Graduate">
+                    </div>
+                    <div class="doll-hologram-ring"></div>
+                </div>
+
+                <button class="doll-trigger-btn" onclick="speakDollIntro()">
+                    💬 Talk with Jayalakshmi
+                </button>
             </div>
+
+            <!-- RIGHT DETAILS PANEL -->
+            <div class="side-panel">
+                <div class="glass-card">
+                    <h3>🛠️ Technical Stack[cite: 2, 4]</h3>
+                    <p>SQL, Python, BigQuery, Amazon Redshift, Power BI, Tableau Server, Salesforce CPQ, and Microsoft Dynamics CRM[cite: 2, 4].</p>
+                    <button class="btn-talk-action" onclick="femaleSpeak('My technical toolkit includes SQL, Python, BigQuery, Power BI, and Salesforce CPQ.')">
+                        🔊 Read Tooling[cite: 2, 4]
+                    </button>
+                </div>
+
+                <div class="glass-card">
+                    <h3>📈 Top EMEA Deliverables[cite: 2, 3]</h3>
+                    <p>Boosted data accuracy to 90%, cut issue resolution time by 25%, and increased sales order process automation by 35% across 5 EMEA countries[cite: 2, 3].</p>
+                    <button class="btn-talk-action" onclick="femaleSpeak('Across EMEA operations, I improved process automation by 35% and data accuracy to 90%.')">
+                        🔊 Read Metrics[cite: 2, 3]
+                    </button>
+                </div>
+
+                <div class="glass-card">
+                    <h3>📄 Verified CV Document[cite: 2]</h3>
+                    <p>Download the official 3-page comprehensive CV detailing full project histories and competencies[cite: 2].</p>
+                    <a href="Jay-CV- MBA and MSC_6+ epx (1).pdf" download="Jayalakshmi_Gangadhar_CV.pdf" class="btn-talk-action" style="background:#64dfdf; color:#080d1e;">
+                        📥 Download CV (PDF)[cite: 2]
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- CV Section -->
+    <section id="cv">
+        <h2 class="section-title">Curriculum Vitae</h2>
+        <div class="cv-card">
+            <div class="cv-flex">
+                <div>
+                    <h3 style="color:#ffffff; font-size:1.3rem;">Official Resume & Academic Summary</h3>
+                    <p style="color:#94a3b8; font-size:0.92rem;">Jayalakshmi Gangadhar — Sales Operations & Strategy Analyst[cite: 2]</p>
+                </div>
+                <a href="Jay-CV- MBA and MSC_6+ epx (1).pdf" download="Jayalakshmi_Gangadhar_CV.pdf" class="cv-btn-main">
+                    📥 Download Verified CV (PDF)[cite: 2]
+                </a>
+            </div>
+            <p style="color:#cbd5e1; font-size:0.95rem; line-height:1.6;">
+                Extensive background in SaaS deal governance, Salesforce CRM/CPQ deployments, and large-scale order-to-cash automations[cite: 2]. Completed dual master’s degrees specializing in international business and sales workflow analytics[cite: 2, 4].
+            </p>
         </div>
     </section>
 
-    <!-- Data Visualization Dashboard Section -->
-    <section id="metrics">
-        <h2 class="section-title">Operational Excellence & Metrics Breakdown</h2>
-        <div class="charts-wrapper">
-            <div class="chart-card">
-                <h3>Domain Core Focus Allocation</h3>
-                <div class="chart-container">
-                    <canvas id="pieChart"></canvas>
-                </div>
-            </div>
-            <div class="chart-card">
-                <h3>Key Project Performance Peaks (%)</h3>
-                <div class="chart-container">
-                    <canvas id="barChart"></canvas>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Work & Project Experience Section -->
+    <!-- Experience Section -->
     <section id="experience">
-        <h2 class="section-title">Milestones & Technical Deliverables</h2>
-
-        <!-- INFOBLOX -->
-        <div class="tech-slide-card">
-            <div class="company-header">
-                <div class="company-meta">
-                    <a href="https://www.infoblox.com/" target="_blank">
-                        <img src="https://i.postimg.cc/5QjYMkW2/infoblox.png" alt="Infoblox Logo" class="company-logo">
-                    </a>
-                    <div class="company-info">
-                        <h2>Infoblox</h2>
-                        <h3>Senior Business Analyst</h3>
-                    </div>
-                </div>
-                <div class="timeline-location">
-                    <strong>Dec 2019 – Jan 2025</strong><br>Bangalore, India (Complete EMEA Region Coverage)<br>
-                    <a href="https://www.infoblox.com/" target="_blank">Website</a>
-                </div>
-            </div>
-
+        <h2 class="section-title">Career Milestones</h2>
+        <div class="exp-card">
+            <h3 style="color:#64dfdf; margin-bottom:15px;">Infoblox — Sales Operations Business Analyst (2019 – 2025)[cite: 2]</h3>
             <div class="projects-grid">
-                <!-- Project 1 -->
                 <div class="project-block">
-                    <div>
-                        <h4>PROJECT 1: Enterprise Data Validation & Contact Enrichment</h4>
-                        <p style="font-size:0.9rem; color:#6c757d;">POC / Greenfield Accounts integration tracking data integrity structures.</p>
-                    </div>
-                    <div class="project-collapsible" id="proj1">
-                        <div class="context-box"><strong>Business Context:</strong> CRM customer data was fragmented, inconsistent, and insufficient for effective target marketing execution.</div>
-                        <div class="solution-box"><strong>Solution:</strong> Established a structured data validation framework to improve contact accuracy and account readiness.</div>
-                        <strong>Key Actions:</strong>
-                        <ul class="bullet-list">
-                            <li>Leveraged Salesforce CRM, LinkedIn Sales Navigator, ZoomInfo, and D&B Hoovers.</li>
-                            <li>Conducted deep-dive profile validations across global markets.</li>
-                            <li>Standardized and cleansed complex legacy CRM datasets.</li>
-                        </ul>
-                        <div class="impact-text">Impact: Improved data accuracy by ~90% | Increased lead/contact readiness by ~25%</div>
-                    </div>
-                    <button class="toggle-btn" onclick="toggleProject('proj1')">View Details</button>
+                    <h4>Enterprise Data Validation[cite: 2]</h4>
+                    <p style="font-size:0.9rem; color:#94a3b8;">Standardized legacy CRM customer datasets across Salesforce, ZoomInfo, and D&B Hoovers[cite: 2].</p>
+                    <span class="impact-pill">Accuracy raised to 90%</span>
                 </div>
-
-                <!-- Project 2 -->
                 <div class="project-block">
-                    <div>
-                        <h4>PROJECT 2: Order Management Compliance Transformation</h4>
-                        <p style="font-size:0.9rem; color:#6c757d;">White Glove Operations implementation targeting validation gaps.</p>
-                    </div>
-                    <div class="project-collapsible" id="proj2">
-                        <div class="context-box"><strong>Business Context:</strong> Order management workflows were complex, manual, and lacked scalable governance validation features.</div>
-                        <div class="solution-box"><strong>Solution:</strong> Redesigned order-to-cash workflows by streamlining hierarchies and executing touch validation controls.</div>
-                        <strong>Key Actions:</strong>
-                        <ul class="bullet-list">
-                            <li>Streamlined internal approval structures to eliminate bottlenecks.</li>
-                            <li>Introduced robust documentation standards across critical pipelines.</li>
-                            <li>Trained partners and sales teams on compliance management protocols.</li>
-                        </ul>
-                        <div class="impact-text">Impact: Workflow efficiency shifted from 40% up to 98%</div>
-                    </div>
-                    <button class="toggle-btn" onclick="toggleProject('proj2')">View Details</button>
+                    <h4>Workflow Automation[cite: 2, 3]</h4>
+                    <p style="font-size:0.9rem; color:#94a3b8;">Directed migration of order management to Microsoft Dynamics CRM over 7 months[cite: 2].</p>
+                    <span class="impact-pill">+35% Process Automation[cite: 2]</span>
                 </div>
-            </div>
-
-            <div style="margin-top: 25px;"></div>
-
-            <div class="projects-grid">
-                <!-- Project 3 -->
                 <div class="project-block">
-                    <div>
-                        <h4>PROJECT 3: Enterprise Data Governance Framework</h4>
-                        <p style="font-size:0.9rem; color:#6c757d;">Scalable data auditing and lead intelligence configuration.</p>
-                    </div>
-                    <div class="project-collapsible" id="proj3">
-                        <div class="context-box"><strong>Business Context:</strong> Corporate data elements lacked governance rules, constraining marketing pipeline intelligence accuracy.</div>
-                        <div class="solution-box"><strong>Solution:</strong> Designed a scalable validation matrix verifying enterprise metrics for deployment.</div>
-                        <strong>Key Actions:</strong>
-                        <ul class="bullet-list">
-                            <li>Validated employee counts, classification keys, and revenue metrics.</li>
-                            <li>Built high-fidelity account datasets tailored for tracking teams.</li>
-                            <li>Audited recurring lifecycles to protect baseline core metrics.</li>
-                        </ul>
-                        <div class="impact-text">Impact: Data accuracy up ~92% | Duplication lowered by 35%</div>
-                    </div>
-                    <button class="toggle-btn" onclick="toggleProject('proj3')">View Details</button>
-                </div>
-
-                <!-- Project 4 -->
-                <div class="project-block">
-                    <div>
-                        <h4>PROJECT 4: Salesforce CRM Optimization & RevOps Enhancement</h4>
-                        <p style="font-size:0.9rem; color:#6c757d;">End-to-End lifecycle mapping from initial Lead to terminal Deal Desk.</p>
-                    </div>
-                    <div class="project-collapsible" id="proj4">
-                        <div class="context-box"><strong>Business Context:</strong> Systems faced reporting friction, pipeline visual limits, and ACV/TCV tracking gaps.</div>
-                        <div class="solution-box"><strong>Solution:</strong> Upgraded configurations, coordinating BDR steps with structural dashboard frameworks.</div>
-                        <strong>Key Actions:</strong>
-                        <ul class="bullet-list">
-                            <li>Optimized opportunity mapping configurations within Salesforce tracking nodes.</li>
-                            <li>Crafted territory-focused business reports utilizing integrated Tableau dashboards.</li>
-                            <li>Resolved processing silos between Sales, Finance, and Deal Desks.</li>
-                        </ul>
-                        <div class="impact-text">Impact: Opportunity metrics accuracy up ~85% | Funnel visibility up 30%</div>
-                    </div>
-                    <button class="toggle-btn" onclick="toggleProject('proj4')">View Details</button>
+                    <h4>EMEA Reporting in Power BI[cite: 3]</h4>
+                    <p style="font-size:0.9rem; color:#94a3b8;">Built live dashboards for 120+ users, lifting forecast accuracy by 18%[cite: 3].</p>
+                    <span class="impact-pill">Forecast accuracy +18%[cite: 3]</span>
                 </div>
             </div>
-        </div>
-
-        <!-- SIFY TECHNOLOGIES -->
-        <div class="tech-slide-card">
-            <div class="company-header">
-                <div class="company-meta">
-                    <a href="https://www.sifytechnologies.com/europe/" target="_blank">
-                        <img src="https://i.postimg.cc/bdFLS7J0/sify.png" alt="Sify Logo" class="company-logo">
-                    </a>
-                    <div class="company-info">
-                        <h2>Sify Technologies Limited</h2>
-                        <h3>Executive Analyst</h3>
-                    </div>
-                </div>
-                <div class="timeline-location">
-                    <strong>Oct 2019 – Jan 2020</strong><br>Bangalore, India<br>
-                    <a href="https://www.sifytechnologies.com/europe/" target="_blank">Website</a>
-                </div>
-            </div>
-
-            <div class="project-block" style="width: 100%;">
-                <div>
-                    <h4>Sales Operations & Customer Success Infrastructure Project</h4>
-                    <p style="font-size:0.9rem; color:#6c757d;">Comprehensive management of structural Order-to-Cash (O2C) processing elements.</p>
-                </div>
-                <div class="project-collapsible" id="projsify">
-                    <strong>Core Operations Covered:</strong>
-                    <ul class="bullet-list">
-                        <li>Supervised order setups, purchase logs, and billing triggers via Oracle CRM & Oracle Fusion.</li>
-                        <li>Owned the renewal tracking framework, securing recurring revenue values.</li>
-                        <li>Managed terminal Customer Satisfaction (CSAT) analytics, addressing resolution bottlenecks.</li>
-                        <li>Assembled functional dashboards charting sales projections and pipeline volumes.</li>
-                        <li>Compiled quotations and structural updates across Telecom, Cloud, and AWS catalogs.</li>
-                    </ul>
-                    <div class="impact-text">Impact: Manual adjustments cut by 30% | Held an on-time fulfillment accuracy mark of ~95%</div>
-                </div>
-                <button class="toggle-btn" onclick="toggleProject('projsify')">View Details</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Education Section -->
-    <section id="education">
-        <h2 class="section-title">Multinational Education Experience in Business Management</h2>
-        <div class="edu-container">
-            <!-- National College of Ireland Card -->
-            <div class="edu-card">
-                <div>
-                    <div class="edu-logo-header">
-                        <a href="https://www.ncirl.ie/" target="_blank">
-                            <img src="https://i.postimg.cc/ydRBrnKf/NCI-logoresized.png" alt="National College of Ireland Logo" class="edu-logo">
-                        </a>
-                        <div class="edu-title">
-                            <h3>National College of Ireland</h3>
-                            <h4>MSc in Business Management</h4>
-                        </div>
-                    </div>
-                    <div class="edu-date">Jan 2025 - June 2026 | Dublin, Ireland</div>
-                    <div class="edu-details">
-                        <strong>Coursework Modules:</strong>
-                        <ul>
-                            <li>Fund Operations</li>
-                            <li>Financial Markets & Capital Markets</li>
-                            <li>Data Analytics for Business</li>
-                            <li>Financial Reporting & Analysis</li>
-                        </ul>
-                        <p style="margin-top: 10px;">
-                            <strong>Achievements:</strong> Thesis and core projects focused strictly on fund operations, financial markets, and capital markets, applying data analysis methods and structural reporting automation models to increase broad operational efficiency and data input accuracy.
-                        </p>
-                    </div>
-                </div>
-                <div class="edu-link-container">
-                    <a href="https://www.ncirl.ie/" target="_blank">Website</a>
-                </div>
-            </div>
-
-            <!-- Christ University Card -->
-            <div class="edu-card">
-                <div>
-                    <div class="edu-logo-header">
-                        <a href="https://www.christuniversity.in/" target="_blank">
-                            <img src="https://i.postimg.cc/MGTptyXL/images.jpg" alt="Christ University Logo" class="edu-logo">
-                        </a>
-                        <div class="edu-title">
-                            <h3>Christ University</h3>
-                            <h4>Master of Business Administration (Executive)</h4>
-                        </div>
-                    </div>
-                    <div class="edu-date">Ended May 2024 | Bangalore, India</div>
-                    <div class="edu-details">
-                        <p><strong>Achievements:</strong> Thesis focused completely on <em>CRM and Sales Workflow Automation</em>.</p>
-                        <p style="margin-top: 8px;">
-                            Drove localized internal sales operational efficiencies up from 68% directly to 98% by successfully automating complex order processing rules and daily administration workflows, enabling accurate on-time logistics delivery and measurable sales performance improvements.
-                        </p>
-                    </div>
-                </div>
-                <div class="edu-link-container">
-                    <a href="https://www.christuniversity.in/" target="_blank">Website</a>
-                </div>
-            </div>
-
-            <!-- GITAM University Card -->
-            <div class="edu-card">
-                <div>
-                    <div class="edu-logo-header">
-                        <img src="https://i.postimg.cc/mD0vF0m3/gitam-logo.png" alt="GITAM University Logo" class="edu-logo" style="object-fit: contain; background: #f8f9fa; padding: 4px; border-radius: 4px;">
-                        <div class="edu-title">
-                            <h3>GITAM University</h3>
-                            <h4>Bachelor of Commerce (B.Com)</h4>
-                        </div>
-                    </div>
-                    <div class="edu-date">Completed July 2017 | Bangalore, India</div>
-                    <div class="edu-details">
-                        <p>Completed core professional concentrations focused directly on <strong>Business Management, Strategy, and Accounts</strong>, building a strong core baseline foundational layer for data audit infrastructure tracking and structural commercial metrics analysis workflows.</p>
-                    </div>
-                </div>
-                <div class="edu-link-container">
-                    <a href="https://vsp.gitam.edu/" target="_blank">Website</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Badges Section -->
-    <section>
-        <div class="badge-container">
-            <span class="badge">Advanced Excel</span>
-            <span class="badge">SQL</span>
-            <span class="badge">Python</span>
-            <span class="badge">Salesforce CPQ</span>
-            <span class="badge">Oracle CRM</span>
-            <span class="badge">Tableau</span>
-            <span class="badge">Agentic AI</span>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 Portfolio | Verified Profile Documentation: JAYALAKSHMI GANGADHAR_ Operations Analyst_20260623 (2).pdf</p>
+        <p>&copy; 2026 Jayalakshmi Gangadhar | Strategy & Operations Analyst</p>
     </footer>
 
-    <!-- JavaScript Execution Blocks -->
+    <!-- Interactive Cursor Eye & Head Movement + Female Voice Script -->
     <script>
-        function toggleProject(id) {
-            const container = document.getElementById(id);
-            const button = container.nextElementSibling;
-            
-            if (!container.style.display || container.style.display === "none") {
-                container.style.display = "block";
-                button.textContent = "Minimize Details";
-            } else {
-                container.style.display = "none";
-                button.textContent = "View Details";
+        let voiceActive = true;
+        let femaleVoice = null;
+
+        // Populate female speech synthesis voice
+        function setupVoices() {
+            if (!('speechSynthesis' in window)) return;
+            const voices = window.speechSynthesis.getVoices();
+            // Select natural female voice
+            femaleVoice = voices.find(v => 
+                (v.name.includes('Female') || v.name.includes('Zira') || v.name.includes('Samantha') || 
+                 v.name.includes('Victoria') || v.name.includes('Karen') || v.name.includes('Google UK English Female') || 
+                 v.name.includes('Natural')) && v.lang.startsWith('en')
+            ) || voices.find(v => v.lang.startsWith('en')) || voices[0];
+        }
+
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.onvoiceschanged = setupVoices;
+            setupVoices();
+        }
+
+        function femaleSpeak(text) {
+            if (!voiceActive || !('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            if (femaleVoice) utterance.voice = femaleVoice;
+            utterance.pitch = 1.15; // Soft natural female pitch
+            utterance.rate = 1.0;
+            window.speechSynthesis.speak(utterance);
+
+            const bubble = document.getElementById('dollBubble');
+            if (bubble) {
+                bubble.innerHTML = `<strong>Jayalakshmi</strong><span>${text}</span>`;
             }
         }
 
-        const ctxPie = document.getElementById('pieChart').getContext('2d');
-        new Chart(ctxPie, {
-            type: 'pie',
-            data: {
-                labels: ['Business Analysis', 'Revenue Operations', 'Data Analytics'],
-                datasets: [{
-                    data: [40, 35, 25],
-                    backgroundColor: ['#0f4c81', '#e63946', '#1d3557'],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { position: 'bottom' }
-                }
+        function routeTo(id, message) {
+            const target = document.getElementById(id);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+                femaleSpeak(message);
             }
-        });
+        }
 
-        const ctxBar = document.getElementById('barChart').getContext('2d');
-        new Chart(ctxBar, {
-            type: 'bar',
-            data: {
-                labels: ['Project 1 Accuracy', 'Project 2 Efficiency', 'Project 3 Accuracy', 'Project 4 Metric Accuracy', 'Sify Delivery Rate'],
-                datasets: [{
-                    label: 'Efficiency / Accuracy Peak Level (%)',
-                    data: [90, 98, 92, 85, 95],
-                    backgroundColor: '#0f4c81',
-                    borderRadius: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: { beginAtZero: true, max: 100 }
-                },
-                plugins: {
-                    legend: { display: false }
-                }
+        function speakDollIntro() {
+            femaleSpeak("Hello! I am Jayalakshmi Gangadhar. I am a Strategy and Operations Analyst with six years of experience across EMEA. Feel free to explore my deliverables or download my CV!");
+        }
+
+        function toggleVoice() {
+            voiceActive = !voiceActive;
+            const btn = document.getElementById('voiceToggleBtn');
+            if (voiceActive) {
+                btn.textContent = "🔊 Female Voice: ON";
+                femaleSpeak("Female voice is active.");
+            } else {
+                btn.textContent = "🔇 Female Voice: OFF";
+                window.speechSynthesis.cancel();
             }
+        }
+
+        // Real-Time 3D Eye & Face Movement Following Cursor
+        const dollModel = document.getElementById('dollModel');
+        const dollImage = document.getElementById('dollImage');
+
+        window.addEventListener('mousemove', (e) => {
+            if (!dollModel || !dollImage) return;
+
+            const rect = dollModel.getBoundingClientRect();
+            const dollCenterX = rect.left + rect.width / 2;
+            const dollCenterY = rect.top + rect.height / 2;
+
+            // Calculate directional offsets (-1 to 1)
+            const deltaX = (e.clientX - dollCenterX) / (window.innerWidth / 2);
+            const deltaY = (e.clientY - dollCenterY) / (window.innerHeight / 2);
+
+            // Subtle 3D head and face rotation (Up, Down, Left, Right)
+            const rotateY = Math.max(-28, Math.min(28, deltaX * 24));
+            const rotateX = Math.max(-24, Math.min(24, -deltaY * 20));
+
+            // Eye and pupil focal pan
+            const panX = Math.max(-12, Math.min(12, deltaX * 10));
+            const panY = Math.max(-10, Math.min(10, deltaY * 8));
+
+            // Apply 3D perspective turn to doll body and face
+            dollModel.style.transform = `perspective(900px) rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
+            dollImage.style.transform = `translate(${panX}px, ${panY}px) scale(1.04)`;
         });
     </script>
 </body>
